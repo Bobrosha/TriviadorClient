@@ -19,6 +19,11 @@ namespace TriviadorClient
             client.AddPlayer("Fortnite");
         }
 
+        public static Client GetClient()
+        {
+            return CreateClient();
+        }
+
         private static Client CreateClient()
         {
             var loggerFactory = LoggerFactory.Create(builder =>
