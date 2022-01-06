@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using TriviadorClient.Entities;
 
 namespace TriviadorClient
@@ -21,12 +22,24 @@ namespace TriviadorClient
             string nickName = TextBoxNickName.Text;
             if (string.IsNullOrWhiteSpace(nickName))
             {
+                TextBlockWrongNickName.Text = "Не подходящее имя!";
                 TextBlockWrongNickName.Visibility = Visibility.Visible;
                 return;
             }
+
+            var names = from player in _Client.GetMap().Players select player.Name;
+
+            if (names.Contains(nickName))
+            {
+                TextBlockWrongNickName.Text = "Такой ник уже существует!";
+                TextBlockWrongNickName.Visibility = Visibility.Visible;
+                return;
+            }
+
             _Client.AddPlayer(TextBoxNickName.Text);
             WindowAuthorization.Visibility = Visibility.Hidden;
-            new Lobby();
+            new LoadingWindow(_Client).Show();
+            WindowAuthorization.Close();
         }
     }
 }

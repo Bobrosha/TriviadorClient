@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace TriviadorClient.Entities
 {
-    class Client
+    public class Client
     {
         private readonly HttpClient _Client;
         private readonly ILogger _Logger;
@@ -21,6 +21,7 @@ namespace TriviadorClient.Entities
             _Logger = logger;
             _Client = new HttpClient();
             _Uri = "http://localhost:5000/TriviadorApi";
+            GetMapFromServer();
         }
 
         public TriviadorMap GetMap()
