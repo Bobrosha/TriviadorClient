@@ -27,6 +27,13 @@ namespace TriviadorClient
                 return;
             }
 
+            if (nickName.Length > 13)
+            {
+               TextBlockWrongNickName.Text = "Максимальная длина 13 символов!";
+               TextBlockWrongNickName.Visibility = Visibility.Visible;
+               return;
+            }
+
             var names = from player in _Client.GetMap().Players select player.Name;
 
             if (names.Contains(nickName))
@@ -38,8 +45,9 @@ namespace TriviadorClient
 
             _Client.AddPlayer(TextBoxNickName.Text);
             WindowAuthorization.Visibility = Visibility.Hidden;
-            new LoadingWindow(_Client).Show();
+            new LoadingWindow(_Client, nickName).Show();
             WindowAuthorization.Close();
+            
         }
     }
 }
