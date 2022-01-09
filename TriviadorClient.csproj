@@ -8,6 +8,21 @@
 
   <ItemGroup>
     <None Remove="triviadorMap.png" />
+    <None Remove="кнопка1.png" />
+    <None Remove="кнопка10.png" />
+    <None Remove="кнопка11.png" />
+    <None Remove="кнопка12.png" />
+    <None Remove="кнопка13.png" />
+    <None Remove="кнопка14.png" />
+    <None Remove="кнопка15.png" />
+    <None Remove="Кнопка2.png" />
+    <None Remove="кнопка3.png" />
+    <None Remove="кнопка4.png" />
+    <None Remove="кнопка5.png" />
+    <None Remove="кнопка6.png" />
+    <None Remove="кнопка7.png" />
+    <None Remove="кнопка8.png" />
+    <None Remove="кнопка9.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +32,21 @@
 
   <ItemGroup>
     <Resource Include="triviadorMap.png" />
+    <Resource Include="кнопка1.png" />
+    <Resource Include="кнопка10.png" />
+    <Resource Include="кнопка11.png" />
+    <Resource Include="кнопка12.png" />
+    <Resource Include="кнопка13.png" />
+    <Resource Include="кнопка14.png" />
+    <Resource Include="кнопка15.png" />
+    <Resource Include="Кнопка2.png" />
+    <Resource Include="кнопка3.png" />
+    <Resource Include="кнопка4.png" />
+    <Resource Include="кнопка5.png" />
+    <Resource Include="кнопка6.png" />
+    <Resource Include="кнопка7.png" />
+    <Resource Include="кнопка8.png" />
+    <Resource Include="кнопка9.png" />
   </ItemGroup>
 
 </Project>
