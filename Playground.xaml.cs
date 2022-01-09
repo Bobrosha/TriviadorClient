@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using TriviadorClient.Entities;
+using static TriviadorClient.Entities.TriviadorMap;
 
 namespace TriviadorClient
 {
@@ -27,11 +29,13 @@ namespace TriviadorClient
             LeaderBoard();
             CreateMap();
             _Client.GetWhoseTurn();
-            while(_Client.GetTurn() != _ThisPlayer.Id)
+            while (_Client.GetTurn() != _ThisPlayer.Id)
             {
-                // asdawdadsawd
-                Thread.Sleep(100);
-                _Client.GetWhoseTurn();
+                // asdawdadsawd PEREDELAT
+                _ = Task.Delay(1000).ContinueWith(_ =>
+                  {
+                      _Client.GetWhoseTurn();
+                  });
             }
             UpdateMapAndSetActive();
         }
@@ -64,9 +68,9 @@ namespace TriviadorClient
 
         private void CreateMap()
         {
-            List<TriviadorMap.Cell> listCells = _Client.GetMap().Cells;
+            List<Cell> listCells = _Client.GetMap().Cells;
             UIElementCollection localButtonMap = CanvasMap.Children;
-            foreach (TriviadorMap.Cell cell in listCells)
+            foreach (Cell cell in listCells)
             {
                 if (cell.OwnerId != null)
                 {
@@ -95,9 +99,9 @@ namespace TriviadorClient
         private void UpdateMapAndSetActive()
         {
             _Client.GetMapFromServer();
-            List<TriviadorMap.Cell> listCells = _Client.GetMap().Cells;
+            List<Cell> listCells = _Client.GetMap().Cells;
             UIElementCollection localButtonMap = CanvasMap.Children;
-            foreach (TriviadorMap.Cell cell in listCells)
+            foreach (Cell cell in listCells)
             {
                 if (cell.OwnerId != null)
                 {
@@ -126,10 +130,14 @@ namespace TriviadorClient
         private void NearestButton_Click_StartBattle(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
-            var a = int.Parse((string)button.Tag);
+            int cellId = int.Parse((string)button.Tag);
 
-            //WindowPlayground.Visibility = Visibility.Hidden;
-            //new Playground(_Client, _ThisPlayer).Show();
+            Cell cell = _Client.GetMap().Cells.Find(x => x.Id == cellId);
+
+            WindowPlayground.Visibility = Visibility.Hidden;
+            new BattleForCell(cell, _Client).Show();
+            WindowPlayground.Visibility = Visibility.Visible;
+            Init();
         }
     }
 }

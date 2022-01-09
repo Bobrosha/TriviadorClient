@@ -13,10 +13,9 @@ namespace TriviadorClient
         private Question _Question;
         private Client _Client;
 
-        public BattleForCell(Cell cell, Question question, Client client)
+        public BattleForCell(Cell cell, Client client)
         {
             _Cell = cell;
-            _Question = question;
             _Client = client;
 
             InitializeComponent();
