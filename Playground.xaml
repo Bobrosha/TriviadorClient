@@ -3,89 +3,84 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TriviadorClient"
         mc:Ignorable="d"
         Title="Playground" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" Visibility="Visible">
     <Grid>
         <Canvas Name="CanvasMap" HorizontalAlignment="Center" Height="906" Margin="0,0,0,0" VerticalAlignment="Top" Width="1900">
-            <Button Name="Cell_1" Height="302" Width="380" Foreground="White">
+            <Button Name="Cell_1" IsEnabled="False" Height="302" Width="380">
                 <Button.Content>
-                    <Image Name="image1"  Source="/Кнопка1.png" Stretch="Fill" Opacity="1">
-                        </Image>
+                    <Image Source="\images\mapButton1.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
-                <Button.Background>
-                    <SolidColorBrush Color="DarkRed" />
-                </Button.Background>
             </Button>
-            <Button Name="Cell_2"  Content="Button2" Height="302" Canvas.Top="302" Width="380">
-                <Button.Background>
-                    <ImageBrush ImageSource="/Кнопка2.png"/>
-                </Button.Background>
+            <Button Name="Cell_2" IsEnabled="False" Height="302" Canvas.Top="302" Width="380">
+                <Button.Content>
+                    <Image Source="\images\mapButton2.png" Stretch="Fill" Opacity="0.75"/>
+                </Button.Content>
             </Button>
-            <Button Name="Cell_3"  Content="Button3" Height="302" Canvas.Top="604" Width="380">
-                <Button.Background>
-                    <ImageBrush ImageSource="/кнопка3.png"/>
-                </Button.Background>
+            <Button Name="Cell_3" IsEnabled="False" Height="302" Canvas.Top="604" Width="380">
+                <Button.Content>
+                    <Image Source="\images\mapButton3.png" Stretch="Fill" Opacity="0.75"/>
+                </Button.Content>
             </Button>
-            <Button Name="Cell_4"  Content="Button4" Height="302" Canvas.Left="380" Width="380">
-                <Button.Background>
-                    <ImageBrush ImageSource="/кнопка4.png"/>
-                </Button.Background>
+            <Button Name="Cell_4" IsEnabled="False" Height="302" Canvas.Left="380" Width="380">
+                <Button.Content>
+                    <Image Source="\images\mapButton4.png" Stretch="Fill" Opacity="0.75"/>
+                </Button.Content>
             </Button>
-            <Button Name="Cell_5"  Content="Button5" Height="302" Canvas.Left="380" Canvas.Top="302" Width="380">
-                <Button.Background>
-                    <ImageBrush ImageSource="/кнопка5.png"/>
-                </Button.Background>
+            <Button Name="Cell_5" IsEnabled="False" Height="302" Canvas.Left="380" Canvas.Top="302" Width="380">
+                <Button.Content>
+                    <Image Source="\images\mapButton5.png" Stretch="Fill" Opacity="0.75"/>
+                </Button.Content>
             </Button>
-            <Button Name="Cell_6"  Content="Button6" Height="302" Canvas.Left="380" Canvas.Top="604" Width="380">
-                <Button.Background>
-                    <ImageBrush ImageSource="/кнопка6.png" TileMode="None"/>
-                </Button.Background>
+            <Button Name="Cell_6" IsEnabled="False" Height="302" Canvas.Left="380" Canvas.Top="604" Width="380">
+                <Button.Content>
+                    <Image Source="\images\mapButton6.png" Stretch="Fill" Opacity="0.75"/>
+                </Button.Content>
             </Button>
-            <Button Name="Cell_7"  Content="Button7" Height="302" Canvas.Left="760" Width="380">
-                <Button.Background>
-                    <ImageBrush ImageSource="/кнопка7.png"/>
-                </Button.Background>
+            <Button Name="Cell_7" IsEnabled="False" Height="302" Canvas.Left="760" Width="380">
+                <Button.Content>
+                    <Image Source="\images\mapButton7.png" Stretch="Fill" Opacity="0.75"/>
+                </Button.Content>
             </Button>
-            <Button Name="Cell_8"  Content="Button8" Height="302" Canvas.Left="760" Canvas.Top="302" Width="380">
-                <Button.Background>
-                    <ImageBrush ImageSource="/кнопка8.png"/>
-                </Button.Background>
+            <Button Name="Cell_8" IsEnabled="False" Height="302" Canvas.Left="760" Canvas.Top="302" Width="380">
+                <Button.Content>
+                    <Image Source="\images\mapButton8.png" Stretch="Fill" Opacity="0.75"/>
+                </Button.Content>
             </Button>
-            <Button Name="Cell_9"  Content="Button9" Height="302" Canvas.Left="760" Canvas.Top="604" Width="380">
-                <Button.Background>
-                    <ImageBrush ImageSource="/кнопка9.png"/>
-                </Button.Background>
+            <Button Name="Cell_9" IsEnabled="False" Height="302" Canvas.Left="760" Canvas.Top="604" Width="380">
+                <Button.Content>
+                    <Image Source="\images\mapButton9.png" Stretch="Fill" Opacity="0.75"/>
+                </Button.Content>
             </Button>
-            <Button Name="Cell_10" Content="Button10" Height="302" Canvas.Left="1140" Width="380">
-                <Button.Background>
-                    <ImageBrush ImageSource="/кнопка10.png"/>
-                </Button.Background>
+            <Button Name="Cell_10" IsEnabled="False" Height="302" Canvas.Left="1140" Width="380">
+                <Button.Content>
+                    <Image Source="\images\mapButton10.png" Stretch="Fill" Opacity="0.75"/>
+                </Button.Content>
             </Button>
-            <Button Name="Cell_11" Content="Button11" Height="302" Canvas.Left="1140" Canvas.Top="302" Width="380">
-                <Button.Background>
-                    <ImageBrush ImageSource="/кнопка11.png"/>
-                </Button.Background>
+            <Button Name="Cell_11" IsEnabled="False" Height="302" Canvas.Left="1140" Canvas.Top="302" Width="380">
+                <Button.Content>
+                    <Image Source="\images\mapButton11.png" Stretch="Fill" Opacity="0.75"/>
+                </Button.Content>
             </Button>
-            <Button Name="Cell_12" Content="Button12" Height="302" Canvas.Left="1140" Canvas.Top="604" Width="380">
-                <Button.Background>
-                    <ImageBrush ImageSource="/кнопка12.png"/>
-                </Button.Background>
+            <Button Name="Cell_12" IsEnabled="False" Height="302" Canvas.Left="1140" Canvas.Top="604" Width="380">
+                <Button.Content>
+                    <Image Source="\images\mapButton12.png" Stretch="Fill" Opacity="0.75"/>
+                </Button.Content>
             </Button>
-            <Button Name="Cell_13" Content="Button13" Height="302" Canvas.Left="1520" Width="380">
-                <Button.Background>
-                    <ImageBrush ImageSource="/кнопка13.png"/>
-                </Button.Background>
+            <Button Name="Cell_13" IsEnabled="False" Height="302" Canvas.Left="1520" Width="380">
+                <Button.Content>
+                    <Image Source="\images\mapButton13.png" Stretch="Fill" Opacity="0.75"/>
+                </Button.Content>
             </Button>
-            <Button Name="Cell_14" Content="Button14" Height="302" Canvas.Left="1520" Canvas.Top="302" Width="380">
-                <Button.Background>
-                    <ImageBrush ImageSource="/кнопка14.png"/>
-                </Button.Background>
+            <Button Name="Cell_14" IsEnabled="False" Height="302" Canvas.Left="1520" Canvas.Top="302" Width="380">
+                <Button.Content>
+                    <Image Source="\images\mapButton14.png" Stretch="Fill" Opacity="0.75"/>
+                </Button.Content>
             </Button>
-            <Button Name="Cell_15" Content="Button15" Height="302" Canvas.Left="1520" Canvas.Top="604" Width="380">
-                <Button.Background>
-                    <ImageBrush ImageSource="/кнопка15.png"/>
-                </Button.Background>
+            <Button Name="Cell_15" IsEnabled="False" Height="302" Canvas.Left="1520" Canvas.Top="604" Width="380">
+                <Button.Content>
+                    <Image Source="\images\mapButton15.png" Stretch="Fill" Opacity="0.75"/>
+                </Button.Content>
             </Button>
         </Canvas>
         <TextBlock HorizontalAlignment="Left" Height="50" Margin="53,962,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="400" FontFamily="Bahnschrift SemiBold" TextAlignment="Center" FontSize="36" Name ="NickName1" FontStretch="Medium" FontWeight="Normal"/>

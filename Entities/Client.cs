@@ -15,7 +15,6 @@ namespace TriviadorClient.Entities
 
         private TriviadorMap _Map;
         private int _Turn;
-
         public Client(ILogger logger)
         {
             _Logger = logger;

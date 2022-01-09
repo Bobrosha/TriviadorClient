@@ -11,7 +11,7 @@ namespace TriviadorClient.Entities
         {
             public int Id { get; set; }
             public int Value { get; set; }
-            public Player Owner { get; set; }
+            public int? OwnerId { get; set; }
             public int Lvl { get; set; }
             public List<int> NearestCells { get; set; }
             public Castle Castle { get; set; }

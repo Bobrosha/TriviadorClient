@@ -1,60 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TriviadorClient.Entities;
 
 namespace TriviadorClient
 {
-   /// <summary>
-   /// Логика взаимодействия для Playground.xaml
-   /// </summary>
-   public partial class Playground : Window
-   {
-      private Client _Client;
-      private Player _ThisPlayer;
+    /// <summary>
+    /// Логика взаимодействия для Playground.xaml
+    /// </summary>
+    public partial class Playground : Window
+    {
+        private readonly Client _Client;
+        private readonly Player _ThisPlayer;
 
-      public Playground(Client client, Player thisPlayer)
-      {
-         _ThisPlayer = thisPlayer;
-         _Client = client;
-         InitializeComponent();
-         LeaderBoard();
-         CreateMap();
-      }
-      
-      private void LeaderBoard()
-      {
-         var player1 = _Client.GetMap().Players[0];
-         var player2 = _Client.GetMap().Players[1];
+        public Playground(Client client, Player thisPlayer)
+        {
+            _ThisPlayer = thisPlayer;
+            _Client = client;
+            InitializeComponent();
+            LeaderBoard();
+            CreateMap();
+        }
 
-         NickName1.Text = player1.Name;
-         NickName2.Text = player2.Name;
+        private void LeaderBoard()
+        {
+            var player1 = _Client.GetMap().Players[0];
+            var player2 = _Client.GetMap().Players[1];
 
-         Score1.Text = player1.Score.ToString();
-         Score2.Text = player2.Score.ToString();
+            NickName1.Text = player1.Name;
+            NickName2.Text = player2.Name;
 
-         PlayerPoint1.Fill = Brushes.Red;
-         PlayerPoint2.Fill = Brushes.Green;
-      }
+            Score1.Text = player1.Score.ToString();
+            Score2.Text = player2.Score.ToString();
 
-      private void CreateMap()
-      {
-         var listCells = _Client.GetMap().Cells;
-         var localButtonMap = CanvasMap.Children; 
-         foreach(var cell in listCells) 
-         {
-            ((Button)localButtonMap[cell.Id - 1]).Content += $" cell ID = {cell.Id}";
-         }
-      }
-   }
+            PlayerPoint1.Fill = Brushes.Red;
+            PlayerPoint2.Fill = Brushes.Green;
+        }
+
+        private void CreateMap()
+        {
+            List<TriviadorMap.Cell> listCells = _Client.GetMap().Cells;
+            UIElementCollection localButtonMap = CanvasMap.Children;
+            foreach (TriviadorMap.Cell cell in listCells)
+            {
+                //if (cell.OwnerId != null)
+                //{
+                //    SolidColorBrush brush = cell.OwnerId == 0 ? new SolidColorBrush(Color.FromRgb(255, 0, 0)) : new SolidColorBrush(Color.FromRgb(0, 255, 0));
+                //    ((Button)localButtonMap[cell.Id - 1]).Background = brush;
+                //}
+
+                Button button1 = (Button)localButtonMap[0];
+                Button button2 = (Button)localButtonMap[1];
+            }
+        }
+    }
 }
