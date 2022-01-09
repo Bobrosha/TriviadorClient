@@ -15,6 +15,7 @@ namespace TriviadorClient.Entities
 
         private TriviadorMap _Map;
         private int _Turn;
+        private Question _Question;
         public Client(ILogger logger)
         {
             _Logger = logger;
@@ -85,9 +86,9 @@ namespace TriviadorClient.Entities
 
                 _Turn = turn;
             }
-            catch (FormatException e)
+            catch (FormatException)
             {
-                _Logger.LogWarning("While taking turn, game session is not ready.");
+                _Logger.LogWarning("Game session is not ready.");
             }
             catch (Exception e)
             {
@@ -147,11 +148,10 @@ namespace TriviadorClient.Entities
             try
             {
                 _Logger.LogInformation("Start updateCell");
-                string responseListPlayers = _Client.GetStringAsync($"{_Uri}/updateCell").Result;
 
                 var json = JsonConvert.SerializeObject(cell);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var result = _Client.PutAsync($"{_Uri}/addPlayer", content).Result;
+                var result = _Client.PutAsync($"{_Uri}/updateCell", content).Result;
                 if (!result.IsSuccessStatusCode)
                 {
                     _Logger.LogWarning($"Cell with id = \"{cell.Id}\" hasn't been updated");
@@ -181,6 +181,42 @@ namespace TriviadorClient.Entities
             {
                 _Logger.LogError("Unknown status, exception: " + e.Message);
                 return false;
+            }
+        }
+
+        public Question GetQuestion()
+        {
+            return _Question;
+        }
+
+        public void GetQuestionFromServer()
+        {
+            try
+            {
+                _Logger.LogInformation("Start getting question");
+                string responseQuestion = _Client.GetStringAsync($"{_Uri}/getQuestion").Result;
+
+                _Question = JsonConvert.DeserializeObject<Question>(responseQuestion);
+            }
+            catch (Exception e)
+            {
+                _Logger.LogError("Error while getting question " + e.Message);
+            }
+        }
+
+        public bool CheckAnswer(string answer)
+        {
+            var content = new StringContent(answer, Encoding.UTF8, "application/json");
+            var result = _Client.PostAsync($"{_Uri}/checkQuestion", content).Result;
+            if (!result.IsSuccessStatusCode)
+            {
+                _Logger.LogWarning($"Error in treatment answer: {answer}");
+                _Logger.LogInformation($"Reason: {result.RequestMessage.Content.ReadAsStringAsync().Result}");
+                return false;
+            }
+            else
+            {
+                return bool.Parse(result.Content.ReadAsStringAsync().Result);
             }
         }
     }

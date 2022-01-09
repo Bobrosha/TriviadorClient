@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -13,14 +14,37 @@ namespace TriviadorClient
     {
         private readonly Client _Client;
         private readonly Player _ThisPlayer;
+        private bool _OurMove;
 
         public Playground(Client client, Player thisPlayer)
         {
             _ThisPlayer = thisPlayer;
             _Client = client;
+
+            _ThisPlayer.Id = 0;
+
             InitializeComponent();
             LeaderBoard();
             CreateMap();
+            _Client.GetWhoseTurn();
+            while(_Client.GetTurn() != _ThisPlayer.Id)
+            {
+                // asdawdadsawd
+                Thread.Sleep(100);
+                _Client.GetWhoseTurn();
+            }
+            UpdateMapAndSetActive();
+        }
+
+        public void Init()
+        {
+            _Client.GetWhoseTurn();
+            while (_Client.GetTurn() != _ThisPlayer.Id)
+            {
+                Thread.Sleep(500);
+                _Client.GetWhoseTurn();
+            }
+            UpdateMapAndSetActive();
         }
 
         private void LeaderBoard()
@@ -50,7 +74,36 @@ namespace TriviadorClient
                     Button button = (Button)localButtonMap[cell.Id - 1];
                     button.Background = brush;
 
-                    _ThisPlayer.Id = 0;
+                    if (cell.OwnerId == _ThisPlayer.Id)
+                    {
+                        foreach (int i in cell.NearestCells)
+                        {
+                            var nearestCell = listCells.Find(x => x.Id == i);
+                            if (nearestCell.OwnerId != _ThisPlayer.Id)
+                            {
+                                Button nearestButton = (Button)localButtonMap[i - 1];
+                                nearestButton.BorderBrush = button.BorderBrush;
+                                nearestButton.BorderThickness = new Thickness(1, 1, 1, 1);
+                                nearestButton.Click -= NearestButton_Click_StartBattle;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void UpdateMapAndSetActive()
+        {
+            _Client.GetMapFromServer();
+            List<TriviadorMap.Cell> listCells = _Client.GetMap().Cells;
+            UIElementCollection localButtonMap = CanvasMap.Children;
+            foreach (TriviadorMap.Cell cell in listCells)
+            {
+                if (cell.OwnerId != null)
+                {
+                    SolidColorBrush brush = cell.OwnerId == 0 ? new SolidColorBrush(Color.FromRgb(255, 0, 0)) : new SolidColorBrush(Color.FromRgb(0, 255, 0));
+                    Button button = (Button)localButtonMap[cell.Id - 1];
+                    button.Background = brush;
 
                     if (cell.OwnerId == _ThisPlayer.Id)
                     {
@@ -72,7 +125,11 @@ namespace TriviadorClient
 
         private void NearestButton_Click_StartBattle(object sender, RoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            Button button = (Button)sender;
+            var a = int.Parse((string)button.Tag);
+
+            //WindowPlayground.Visibility = Visibility.Hidden;
+            //new Playground(_Client, _ThisPlayer).Show();
         }
     }
 }

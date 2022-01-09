@@ -1,18 +1,19 @@
-﻿<Window x:Class="TriviadorClient.Playground"
+﻿<Window Name="WindowPlayground"
+        x:Class="TriviadorClient.Playground"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Playground" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" Visibility="Visible">
+        Title="TRIVIADOR" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" Visibility="Visible">
     <Grid>
         <Canvas Name="CanvasMap" HorizontalAlignment="Center" Height="906" Margin="0,0,0,0" VerticalAlignment="Top" Width="1900">
-            <Button Name="Cell_1" Height="302" Width="380">
+            <Button Name="Cell_1" Height="302" Width="380" Tag="0">
                 <Button.Content>
                     <Image Source="/mapButton1.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_2" Height="302" Canvas.Top="302" Width="380">
+            <Button Name="Cell_2" Height="302" Canvas.Top="302" Width="380" Tag="1">
                 <Button.Content>
                     <Image Source="/mapButton2.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
