@@ -44,15 +44,35 @@ namespace TriviadorClient
             UIElementCollection localButtonMap = CanvasMap.Children;
             foreach (TriviadorMap.Cell cell in listCells)
             {
-                //if (cell.OwnerId != null)
-                //{
-                //    SolidColorBrush brush = cell.OwnerId == 0 ? new SolidColorBrush(Color.FromRgb(255, 0, 0)) : new SolidColorBrush(Color.FromRgb(0, 255, 0));
-                //    ((Button)localButtonMap[cell.Id - 1]).Background = brush;
-                //}
+                if (cell.OwnerId != null)
+                {
+                    SolidColorBrush brush = cell.OwnerId == 0 ? new SolidColorBrush(Color.FromRgb(255, 0, 0)) : new SolidColorBrush(Color.FromRgb(0, 255, 0));
+                    Button button = (Button)localButtonMap[cell.Id - 1];
+                    button.Background = brush;
 
-                Button button1 = (Button)localButtonMap[0];
-                Button button2 = (Button)localButtonMap[1];
+                    _ThisPlayer.Id = 0;
+
+                    if (cell.OwnerId == _ThisPlayer.Id)
+                    {
+                        foreach (int i in cell.NearestCells)
+                        {
+                            var nearestCell = listCells.Find(x => x.Id == i);
+                            if (nearestCell.OwnerId != _ThisPlayer.Id)
+                            {
+                                Button nearestButton = (Button)localButtonMap[i - 1];
+                                nearestButton.BorderBrush = brush;
+                                nearestButton.BorderThickness = new Thickness(5, 5, 5, 5);
+                                nearestButton.Click += NearestButton_Click_StartBattle;
+                            }
+                        }
+                    }
+                }
             }
+        }
+
+        private void NearestButton_Click_StartBattle(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

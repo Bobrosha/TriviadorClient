@@ -7,79 +7,79 @@
         Title="Playground" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" Visibility="Visible">
     <Grid>
         <Canvas Name="CanvasMap" HorizontalAlignment="Center" Height="906" Margin="0,0,0,0" VerticalAlignment="Top" Width="1900">
-            <Button Name="Cell_1" IsEnabled="False" Height="302" Width="380">
+            <Button Name="Cell_1" Height="302" Width="380">
                 <Button.Content>
-                    <Image Source="\images\mapButton1.png" Stretch="Fill" Opacity="0.75"/>
+                    <Image Source="C:\games\Microsoft Visual Studio\source\repos\TriviadorClient\images\mapButton1.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_2" IsEnabled="False" Height="302" Canvas.Top="302" Width="380">
+            <Button Name="Cell_2" Height="302" Canvas.Top="302" Width="380">
                 <Button.Content>
-                    <Image Source="\images\mapButton2.png" Stretch="Fill" Opacity="0.75"/>
+                    <Image Source="C:\games\Microsoft Visual Studio\source\repos\TriviadorClient\images\mapButton2.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_3" IsEnabled="False" Height="302" Canvas.Top="604" Width="380">
+            <Button Name="Cell_3" Height="302" Canvas.Top="604" Width="380">
                 <Button.Content>
-                    <Image Source="\images\mapButton3.png" Stretch="Fill" Opacity="0.75"/>
+                    <Image Source="C:\games\Microsoft Visual Studio\source\repos\TriviadorClient\images\mapButton3.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_4" IsEnabled="False" Height="302" Canvas.Left="380" Width="380">
+            <Button Name="Cell_4" Height="302" Canvas.Left="380" Width="380">
                 <Button.Content>
-                    <Image Source="\images\mapButton4.png" Stretch="Fill" Opacity="0.75"/>
+                    <Image Source="C:\games\Microsoft Visual Studio\source\repos\TriviadorClient\images\mapButton4.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_5" IsEnabled="False" Height="302" Canvas.Left="380" Canvas.Top="302" Width="380">
+            <Button Name="Cell_5" Height="302" Canvas.Left="380" Canvas.Top="302" Width="380">
                 <Button.Content>
-                    <Image Source="\images\mapButton5.png" Stretch="Fill" Opacity="0.75"/>
+                    <Image Source="C:\games\Microsoft Visual Studio\source\repos\TriviadorClient\images\mapButton5.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_6" IsEnabled="False" Height="302" Canvas.Left="380" Canvas.Top="604" Width="380">
+            <Button Name="Cell_6" Height="302" Canvas.Left="380" Canvas.Top="604" Width="380">
                 <Button.Content>
-                    <Image Source="\images\mapButton6.png" Stretch="Fill" Opacity="0.75"/>
+                    <Image Source="C:\games\Microsoft Visual Studio\source\repos\TriviadorClient\images\mapButton6.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_7" IsEnabled="False" Height="302" Canvas.Left="760" Width="380">
+            <Button Name="Cell_7" Height="302" Canvas.Left="760" Width="380">
                 <Button.Content>
-                    <Image Source="\images\mapButton7.png" Stretch="Fill" Opacity="0.75"/>
+                    <Image Source="C:\games\Microsoft Visual Studio\source\repos\TriviadorClient\images\mapButton7.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_8" IsEnabled="False" Height="302" Canvas.Left="760" Canvas.Top="302" Width="380">
+            <Button Name="Cell_8" Height="302" Canvas.Left="760" Canvas.Top="302" Width="380">
                 <Button.Content>
-                    <Image Source="\images\mapButton8.png" Stretch="Fill" Opacity="0.75"/>
+                    <Image Source="C:\games\Microsoft Visual Studio\source\repos\TriviadorClient\images\mapButton8.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_9" IsEnabled="False" Height="302" Canvas.Left="760" Canvas.Top="604" Width="380">
+            <Button Name="Cell_9" Height="302" Canvas.Left="760" Canvas.Top="604" Width="380">
                 <Button.Content>
-                    <Image Source="\images\mapButton9.png" Stretch="Fill" Opacity="0.75"/>
+                    <Image Source="C:\games\Microsoft Visual Studio\source\repos\TriviadorClient\images\mapButton9.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_10" IsEnabled="False" Height="302" Canvas.Left="1140" Width="380">
+            <Button Name="Cell_10" Height="302" Canvas.Left="1140" Width="380">
                 <Button.Content>
-                    <Image Source="\images\mapButton10.png" Stretch="Fill" Opacity="0.75"/>
+                    <Image Source="C:\games\Microsoft Visual Studio\source\repos\TriviadorClient\images\mapButton10.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_11" IsEnabled="False" Height="302" Canvas.Left="1140" Canvas.Top="302" Width="380">
+            <Button Name="Cell_11" Height="302" Canvas.Left="1140" Canvas.Top="302" Width="380">
                 <Button.Content>
-                    <Image Source="\images\mapButton11.png" Stretch="Fill" Opacity="0.75"/>
+                    <Image Source="C:\games\Microsoft Visual Studio\source\repos\TriviadorClient\images\mapButton11.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_12" IsEnabled="False" Height="302" Canvas.Left="1140" Canvas.Top="604" Width="380">
+            <Button Name="Cell_12" Height="302" Canvas.Left="1140" Canvas.Top="604" Width="380">
                 <Button.Content>
-                    <Image Source="\images\mapButton12.png" Stretch="Fill" Opacity="0.75"/>
+                    <Image Source="C:\games\Microsoft Visual Studio\source\repos\TriviadorClient\images\mapButton12.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_13" IsEnabled="False" Height="302" Canvas.Left="1520" Width="380">
+            <Button Name="Cell_13" Height="302" Canvas.Left="1520" Width="380">
                 <Button.Content>
-                    <Image Source="\images\mapButton13.png" Stretch="Fill" Opacity="0.75"/>
+                    <Image Source="C:\games\Microsoft Visual Studio\source\repos\TriviadorClient\images\mapButton13.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_14" IsEnabled="False" Height="302" Canvas.Left="1520" Canvas.Top="302" Width="380">
+            <Button Name="Cell_14" Height="302" Canvas.Left="1520" Canvas.Top="302" Width="380">
                 <Button.Content>
-                    <Image Source="\images\mapButton14.png" Stretch="Fill" Opacity="0.75"/>
+                    <Image Source="C:\games\Microsoft Visual Studio\source\repos\TriviadorClient\images\mapButton14.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_15" IsEnabled="False" Height="302" Canvas.Left="1520" Canvas.Top="604" Width="380">
+            <Button Name="Cell_15" Height="302" Canvas.Left="1520" Canvas.Top="604" Width="380">
                 <Button.Content>
-                    <Image Source="\images\mapButton15.png" Stretch="Fill" Opacity="0.75"/>
+                    <Image Source="C:\games\Microsoft Visual Studio\source\repos\TriviadorClient\images\mapButton15.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
         </Canvas>
