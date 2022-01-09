@@ -8,21 +8,85 @@
         Title="Playground" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" Visibility="Visible">
     <Grid>
         <Canvas Name="CanvasMap" HorizontalAlignment="Center" Height="906" Margin="0,0,0,0" VerticalAlignment="Top" Width="1900">
-            <Button Name="Cell_1"  Content="Button1" Height="302" Width="380"/>
-            <Button Name="Cell_2"  Content="Button2" Height="302" Canvas.Top="302" Width="380"/>
-            <Button Name="Cell_3"  Content="Button3" Height="302" Canvas.Top="604" Width="380" IsEnabled="False"/>
-            <Button Name="Cell_4"  Content="Button4" Height="302" Canvas.Left="380" Width="380"/>
-            <Button Name="Cell_5"  Content="Button5" Height="302" Canvas.Left="380" Canvas.Top="302" Width="380"/>
-            <Button Name="Cell_6"  Content="Button6" Height="302" Canvas.Left="380" Canvas.Top="604" Width="380" IsEnabled="False"/>
-            <Button Name="Cell_7"  Content="Button7" Height="302" Canvas.Left="760" Width="380"/>
-            <Button Name="Cell_8"  Content="Button8" Height="302" Canvas.Left="760" Canvas.Top="302" Width="380"/>
-            <Button Name="Cell_9"  Content="Button9" Height="302" Canvas.Left="760" Canvas.Top="604" Width="380"/>
-            <Button Name="Cell_10" Content="Button10" Height="302" Canvas.Left="1140" Width="380"/>
-            <Button Name="Cell_11" Content="Button11" Height="302" Canvas.Left="1140" Canvas.Top="302" Width="380"/>
-            <Button Name="Cell_12" Content="Button12" Height="302" Canvas.Left="1140" Canvas.Top="604" Width="380"/>
-            <Button Name="Cell_13" Content="Button13" Height="302" Canvas.Left="1520" Width="380"/>
-            <Button Name="Cell_14" Content="Button14" Height="302" Canvas.Left="1520" Canvas.Top="302" Width="380"/>
-            <Button Name="Cell_15" Content="Button15" Height="302" Canvas.Left="1520" Canvas.Top="604" Width="380"/>
+            <Button Name="Cell_1" Height="302" Width="380" Foreground="White">
+                <Button.Content>
+                    <Image Name="image1"  Source="/Кнопка1.png" Stretch="Fill" Opacity="1">
+                        </Image>
+                </Button.Content>
+                <Button.Background>
+                    <SolidColorBrush Color="DarkRed" />
+                </Button.Background>
+            </Button>
+            <Button Name="Cell_2"  Content="Button2" Height="302" Canvas.Top="302" Width="380">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Кнопка2.png"/>
+                </Button.Background>
+            </Button>
+            <Button Name="Cell_3"  Content="Button3" Height="302" Canvas.Top="604" Width="380">
+                <Button.Background>
+                    <ImageBrush ImageSource="/кнопка3.png"/>
+                </Button.Background>
+            </Button>
+            <Button Name="Cell_4"  Content="Button4" Height="302" Canvas.Left="380" Width="380">
+                <Button.Background>
+                    <ImageBrush ImageSource="/кнопка4.png"/>
+                </Button.Background>
+            </Button>
+            <Button Name="Cell_5"  Content="Button5" Height="302" Canvas.Left="380" Canvas.Top="302" Width="380">
+                <Button.Background>
+                    <ImageBrush ImageSource="/кнопка5.png"/>
+                </Button.Background>
+            </Button>
+            <Button Name="Cell_6"  Content="Button6" Height="302" Canvas.Left="380" Canvas.Top="604" Width="380">
+                <Button.Background>
+                    <ImageBrush ImageSource="/кнопка6.png" TileMode="None"/>
+                </Button.Background>
+            </Button>
+            <Button Name="Cell_7"  Content="Button7" Height="302" Canvas.Left="760" Width="380">
+                <Button.Background>
+                    <ImageBrush ImageSource="/кнопка7.png"/>
+                </Button.Background>
+            </Button>
+            <Button Name="Cell_8"  Content="Button8" Height="302" Canvas.Left="760" Canvas.Top="302" Width="380">
+                <Button.Background>
+                    <ImageBrush ImageSource="/кнопка8.png"/>
+                </Button.Background>
+            </Button>
+            <Button Name="Cell_9"  Content="Button9" Height="302" Canvas.Left="760" Canvas.Top="604" Width="380">
+                <Button.Background>
+                    <ImageBrush ImageSource="/кнопка9.png"/>
+                </Button.Background>
+            </Button>
+            <Button Name="Cell_10" Content="Button10" Height="302" Canvas.Left="1140" Width="380">
+                <Button.Background>
+                    <ImageBrush ImageSource="/кнопка10.png"/>
+                </Button.Background>
+            </Button>
+            <Button Name="Cell_11" Content="Button11" Height="302" Canvas.Left="1140" Canvas.Top="302" Width="380">
+                <Button.Background>
+                    <ImageBrush ImageSource="/кнопка11.png"/>
+                </Button.Background>
+            </Button>
+            <Button Name="Cell_12" Content="Button12" Height="302" Canvas.Left="1140" Canvas.Top="604" Width="380">
+                <Button.Background>
+                    <ImageBrush ImageSource="/кнопка12.png"/>
+                </Button.Background>
+            </Button>
+            <Button Name="Cell_13" Content="Button13" Height="302" Canvas.Left="1520" Width="380">
+                <Button.Background>
+                    <ImageBrush ImageSource="/кнопка13.png"/>
+                </Button.Background>
+            </Button>
+            <Button Name="Cell_14" Content="Button14" Height="302" Canvas.Left="1520" Canvas.Top="302" Width="380">
+                <Button.Background>
+                    <ImageBrush ImageSource="/кнопка14.png"/>
+                </Button.Background>
+            </Button>
+            <Button Name="Cell_15" Content="Button15" Height="302" Canvas.Left="1520" Canvas.Top="604" Width="380">
+                <Button.Background>
+                    <ImageBrush ImageSource="/кнопка15.png"/>
+                </Button.Background>
+            </Button>
         </Canvas>
         <TextBlock HorizontalAlignment="Left" Height="50" Margin="53,962,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="400" FontFamily="Bahnschrift SemiBold" TextAlignment="Center" FontSize="36" Name ="NickName1" FontStretch="Medium" FontWeight="Normal"/>
         <TextBlock HorizontalAlignment="Left" Height="50" Margin="458,962,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="104" FontFamily="Calibri Light" TextAlignment="Center" FontSize="36" Name ="Score1"/>
