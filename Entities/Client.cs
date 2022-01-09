@@ -168,5 +168,21 @@ namespace TriviadorClient.Entities
                 _Logger.LogError("Error while updateCell " + e.Message);
             }
         }
+
+        public bool GetReadyStatus()
+        {
+            try
+            {
+                _Logger.LogInformation("Getting game ready status from server");
+                string responseReadyStatus = _Client.GetStringAsync($"{_Uri}/readyStatus").Result;
+
+                return bool.Parse(responseReadyStatus);
+            }
+            catch (Exception e)
+            {
+                _Logger.LogError("Unknown status, exception: " + e.Message);
+                return false;
+            }
+        }
     }
 }
