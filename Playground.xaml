@@ -84,12 +84,13 @@
                 </Button.Content>
             </Button>
         </Canvas>
-        <TextBlock HorizontalAlignment="Left" Height="50" Margin="53,962,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="400" FontFamily="Bahnschrift SemiBold" TextAlignment="Center" FontSize="36" Name ="NickName1" FontStretch="Medium" FontWeight="Normal"/>
-        <TextBlock HorizontalAlignment="Left" Height="50" Margin="458,962,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="104" FontFamily="Calibri Light" TextAlignment="Center" FontSize="36" Name ="Score1"/>
-        <TextBlock HorizontalAlignment="Left" Height="50" Margin="1321,962,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="400" FontFamily="Bahnschrift SemiBold" TextAlignment="Center" FontSize="36" FontWeight="UltraBold" Name ="NickName2"/>
-        <TextBlock HorizontalAlignment="Left" Height="50" Margin="1726,962,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="104" FontFamily="Calibri Light" TextAlignment="Center" FontSize="36" Name ="Score2"/>
-        <Ellipse HorizontalAlignment="Left" Height="30" Margin="76,970,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" Name ="PlayerPoint1"/>
-        <Ellipse HorizontalAlignment="Left" Height="30" Margin="1342,970,0,0" Stroke="Black" VerticalAlignment="Top" Width="30" Name ="PlayerPoint2"/>
-
+        <TextBlock Name ="NickName1" HorizontalAlignment="Left" Height="50" Margin="53,962,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="400" FontFamily="Bahnschrift SemiBold" TextAlignment="Center" FontSize="36" FontStretch="Medium" FontWeight="Normal"/>
+        <TextBlock Name ="Score1" HorizontalAlignment="Left" Height="50" Margin="458,962,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="104" FontFamily="Calibri Light" TextAlignment="Center" FontSize="36"/>
+        <TextBlock Name ="NickName2" HorizontalAlignment="Left" Height="50" Margin="1321,962,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="400" FontFamily="Bahnschrift SemiBold" TextAlignment="Center" FontSize="36" FontWeight="UltraBold"/>
+        <TextBlock Name ="Score2" HorizontalAlignment="Left" Height="50" Margin="1726,962,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Width="104" FontFamily="Calibri Light" TextAlignment="Center" FontSize="36"/>
+        <Ellipse Name ="PlayerPoint1" HorizontalAlignment="Left" Height="30" Margin="76,970,0,0" Stroke="Black" VerticalAlignment="Top" Width="30"/>
+        <Ellipse Name ="PlayerPoint2" HorizontalAlignment="Left" Height="30" Margin="1342,970,0,0" Stroke="Black" VerticalAlignment="Top" Width="30"/>
+        <TextBlock Name ="TextBlockTurn" HorizontalAlignment="Center" Height="50" Margin="0,962,0,0" Text="Ход оппонента" Visibility="Hidden" TextWrapping="Wrap" VerticalAlignment="Top" Width="276" FontFamily="Bahnschrift SemiBold" TextAlignment="Center" FontSize="36" FontStretch="Medium" FontWeight="Normal"/>
+        <TextBlock Name ="TextBlockTurnTimes" HorizontalAlignment="Left" Height="50" Margin="1103,962,0,0" Text="90" Visibility="Hidden" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" FontFamily="Bahnschrift SemiBold" TextAlignment="Center" FontSize="36" FontStretch="Medium" FontWeight="Normal"/>
     </Grid>
 </Window>

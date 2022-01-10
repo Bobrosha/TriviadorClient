@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -22,12 +20,14 @@ namespace TriviadorClient
         private bool _MineTurn;
         private DispatcherTimer _Timer;
 
+        private double timer;
+
         public Playground(Client client, Player thisPlayer)
         {
             _ThisPlayer = thisPlayer;
             _Client = client;
 
-            _ThisPlayer.Id = 0;
+            //_ThisPlayer.Id = 1;
 
             InitializeComponent();
             LeaderBoard();
@@ -46,6 +46,15 @@ namespace TriviadorClient
 
             if (!_MineTurn)
             {
+                timer = 0;
+
+                SolidColorBrush brush = _ThisPlayer.Id != 0 ? new SolidColorBrush(Color.FromRgb(255, 0, 0)) : new SolidColorBrush(Color.FromRgb(0, 255, 0));
+                TextBlockTurn.Foreground = brush;
+                TextBlockTurn.Visibility = Visibility.Visible;
+
+                TextBlockTurnTimes.Foreground = brush;
+                TextBlockTurnTimes.Visibility = Visibility.Visible;
+
                 _Timer.Start();
             }
         }
@@ -53,24 +62,21 @@ namespace TriviadorClient
         private void CheckTurn(object sender, EventArgs e)
         {
             _Client.GetWhoseTurn();
-            if (_Client.GetTurn() == _ThisPlayer.Id)
+            timer += _Timer.Interval.TotalMilliseconds;
+            TextBlockTurnTimes.Text = String.Format("{0:f1}", timer / 1000);
+            if (_ThisPlayer.Id == _Client.GetTurn())
             {
+                TextBlockTurn.Visibility = Visibility.Hidden;
+                TextBlockTurnTimes.Visibility = Visibility.Hidden;
                 _Timer.Stop();
+                Init();
             }
         }
 
-        //public void Init()
-        //{
-        //    _Client.GetWhoseTurn();
-        //    while (_Client.GetTurn() != _ThisPlayer.Id)
-        //    {
-        //        Thread.Sleep(500);
-        //        _Client.GetWhoseTurn();
-        //    }
-        //}
-
         private void LeaderBoard()
         {
+            _Client.GetPlayersList();
+
             var player1 = _Client.GetMap().Players[0];
             var player2 = _Client.GetMap().Players[1];
 
@@ -125,49 +131,19 @@ namespace TriviadorClient
             }
         }
 
-        //private void UpdateMapAndSetActive()
-        //{
-        //    _Client.GetMapFromServer();
-        //    List<Cell> listCells = _Client.GetMap().Cells;
-        //    UIElementCollection localButtonMap = CanvasMap.Children;
-        //    foreach (Cell cell in listCells)
-        //    {
-        //        if (cell.OwnerId != null)
-        //        {
-        //            SolidColorBrush brush = cell.OwnerId == 0 ? new SolidColorBrush(Color.FromRgb(255, 0, 0)) : new SolidColorBrush(Color.FromRgb(0, 255, 0));
-        //            Button button = (Button)localButtonMap[cell.Id - 1];
-        //            button.Background = brush;
-
-        //            if (cell.OwnerId == _ThisPlayer.Id)
-        //            {
-        //                foreach (int i in cell.NearestCells)
-        //                {
-        //                    var nearestCell = listCells.Find(x => x.Id == i);
-        //                    if (nearestCell.OwnerId != _ThisPlayer.Id)
-        //                    {
-        //                        Button nearestButton = (Button)localButtonMap[i - 1];
-        //                        nearestButton.BorderBrush = brush;
-        //                        nearestButton.BorderThickness = new Thickness(5, 5, 5, 5);
-        //                        nearestButton.Click += Button_Click_StartQuestion;
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
-
-        private void VisibleOn(object sender, EventArgs e)
+        private void EndTurn(object sender, EventArgs e)
         {
             WindowPlayground.Visibility = Visibility.Visible;
+            _Client.NextTurn();
+            Init();
         }
-
 
         private void Button_Click_StartQuestion(object sender, RoutedEventArgs e)
         {
             WindowPlayground.Visibility = Visibility.Hidden;
-            var a = new Questions(_Client);
-            a.Closed += new EventHandler(VisibleOn);
-            a.Show();
+            var questionWindow = new Questions(_Client);
+            questionWindow.Closed += new EventHandler(EndTurn);
+            questionWindow.Show();
         }
     }
 }

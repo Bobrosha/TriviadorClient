@@ -80,7 +80,7 @@ namespace TriviadorClient.Entities
             try
             {
                 _Logger.LogInformation("Start getting turn");
-                string responseTurn = _Client.GetStringAsync($"{_Uri}/getWhoseTurn").Result;
+                string responseTurn = _Client.GetStringAsync($"{_Uri}/whoseTurn").Result;
 
                 int turn = int.Parse(responseTurn);
 
