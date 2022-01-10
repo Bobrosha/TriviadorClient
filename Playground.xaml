@@ -13,7 +13,7 @@
                     <Image Source="/mapButton1.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_2" Height="302" Canvas.Top="302" Width="380" Tag="1">
+            <Button Name="Cell_2" Click="Button_Click_StartQuestion" Height="302" Canvas.Top="302" Width="380" Tag="1">
                 <Button.Content>
                     <Image Source="/mapButton2.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
