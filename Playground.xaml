@@ -13,72 +13,72 @@
                     <Image Source="/mapButton1.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_2" Click="Button_Click_StartQuestion" Height="302" Canvas.Top="302" Width="380" Tag="1">
+            <Button Name="Cell_2" Height="302" Canvas.Top="302" Width="380" Tag="1">
                 <Button.Content>
                     <Image Source="/mapButton2.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_3" Height="302" Canvas.Top="604" Width="380">
+            <Button Name="Cell_3" Height="302" Canvas.Top="604" Width="380" Tag="2">
                 <Button.Content>
                     <Image Source="/mapButton3.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_4" Height="302" Canvas.Left="380" Width="380">
+            <Button Name="Cell_4" Height="302" Canvas.Left="380" Width="380" Tag="3">
                 <Button.Content>
                     <Image Source="/mapButton4.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_5" Height="302" Canvas.Left="380" Canvas.Top="302" Width="380">
+            <Button Name="Cell_5" Height="302" Canvas.Left="380" Canvas.Top="302" Width="380" Tag="4">
                 <Button.Content>
                     <Image Source="/mapButton5.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_6" Height="302" Canvas.Left="380" Canvas.Top="604" Width="380">
+            <Button Name="Cell_6" Height="302" Canvas.Left="380" Canvas.Top="604" Width="380" Tag="5">
                 <Button.Content>
                     <Image Source="/mapButton6.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_7" Height="302" Canvas.Left="760" Width="380">
+            <Button Name="Cell_7" Height="302" Canvas.Left="760" Width="380" Tag="6">
                 <Button.Content>
                     <Image Source="/mapButton7.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_8" Height="302" Canvas.Left="760" Canvas.Top="302" Width="380">
+            <Button Name="Cell_8" Height="302" Canvas.Left="760" Canvas.Top="302" Width="380" Tag="7">
                 <Button.Content>
                     <Image Source="/mapButton8.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_9" Height="302" Canvas.Left="760" Canvas.Top="604" Width="380">
+            <Button Name="Cell_9" Height="302" Canvas.Left="760" Canvas.Top="604" Width="380" Tag="8">
                 <Button.Content>
                     <Image Source="/mapButton9.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_10" Height="302" Canvas.Left="1140" Width="380">
+            <Button Name="Cell_10" Height="302" Canvas.Left="1140" Width="380" Tag="9">
                 <Button.Content>
                     <Image Source="/mapButton10.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_11" Height="302" Canvas.Left="1140" Canvas.Top="302" Width="380">
+            <Button Name="Cell_11" Height="302" Canvas.Left="1140" Canvas.Top="302" Width="380" Tag="10">
                 <Button.Content>
                     <Image Source="/mapButton11.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_12" Height="302" Canvas.Left="1140" Canvas.Top="604" Width="380">
+            <Button Name="Cell_12" Height="302" Canvas.Left="1140" Canvas.Top="604" Width="380" Tag="11">
                 <Button.Content>
                     <Image Source="/mapButton12.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_13" Height="302" Canvas.Left="1520" Width="380">
+            <Button Name="Cell_13" Height="302" Canvas.Left="1520" Width="380" Tag="12">
                 <Button.Content>
                     <Image Source="/mapButton13.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_14" Height="302" Canvas.Left="1520" Canvas.Top="302" Width="380">
+            <Button Name="Cell_14" Height="302" Canvas.Left="1520" Canvas.Top="302" Width="380" Tag="13">
                 <Button.Content>
                     <Image Source="/mapButton14.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>
             </Button>
-            <Button Name="Cell_15" Height="302" Canvas.Left="1520" Canvas.Top="604" Width="380">
+            <Button Name="Cell_15" Height="302" Canvas.Left="1520" Canvas.Top="604" Width="380" Tag="14">
                 <Button.Content>
                     <Image Source="/mapButton15.png" Stretch="Fill" Opacity="0.75"/>
                 </Button.Content>

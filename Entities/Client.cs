@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -16,12 +17,17 @@ namespace TriviadorClient.Entities
         private TriviadorMap _Map;
         private int _Turn;
         private Question _Question;
+
+
         public Client(ILogger logger)
         {
             _Logger = logger;
             _Client = new HttpClient();
             _Uri = "http://localhost:5000/TriviadorApi";
-            GetMapFromServer();
+            //GetMapFromServer();
+            HubConnection a = new HubConnectionBuilder().WithUrl("http://localhost:5000/game").Build();
+            a.StartAsync();
+            a.On();
         }
 
         public TriviadorMap GetMap()
