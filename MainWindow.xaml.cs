@@ -17,6 +17,11 @@ namespace TriviadorClient
             InitializeComponent();
         }
 
+        private void Button_Click_HostGame(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void Button_Click_AddPlayer(object sender, RoutedEventArgs e)
         {
             string nickName = TextBoxNickName.Text;
@@ -29,9 +34,9 @@ namespace TriviadorClient
 
             if (nickName.Length > 13)
             {
-               TextBlockWrongNickName.Text = "Максимальная длина 13 символов!";
-               TextBlockWrongNickName.Visibility = Visibility.Visible;
-               return;
+                TextBlockWrongNickName.Text = "Максимальная длина 13 символов!";
+                TextBlockWrongNickName.Visibility = Visibility.Visible;
+                return;
             }
 
             var names = from player in _Client.GetMap().Players select player.Name;
@@ -47,7 +52,7 @@ namespace TriviadorClient
             WindowAuthorization.Visibility = Visibility.Hidden;
             new LoadingWindow(_Client, nickName).Show();
             WindowAuthorization.Close();
-            
+
         }
     }
 }

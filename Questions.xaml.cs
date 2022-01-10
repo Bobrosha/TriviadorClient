@@ -17,9 +17,9 @@ namespace TriviadorClient
         {
             _Client = client;
             InitializeComponent();
-            _Timer = new DispatcherTimer();
+            _Timer = new DispatcherTimer(DispatcherPriority.Normal);
             _Timer.Interval = TimeSpan.FromMilliseconds(1000);
-            _Timer.Tick += Timer_Tick;
+            _Timer.Tick += new EventHandler(Timer_Tick);
             _Timer.Start();
             _DeadTimer = 60;
         }
