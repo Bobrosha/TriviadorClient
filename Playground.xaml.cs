@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,8 +18,7 @@ namespace TriviadorClient
         private readonly Client _Client;
         private readonly Player _ThisPlayer;
 
-        private bool _MineTurn;
-        private DispatcherTimer _Timer;
+        private DispatcherTimer timer = new DispatcherTimer();
 
         public Playground(Client client, Player thisPlayer)
         {
@@ -31,43 +29,29 @@ namespace TriviadorClient
 
             InitializeComponent();
             LeaderBoard();
-            Init();
+            CreateMap();
+            _Client.GetWhoseTurn();
+            while (_Client.GetTurn() != _ThisPlayer.Id)
+            {
+                // asdawdadsawd PEREDELAT
+                _ = Task.Delay(1000).ContinueWith(_ =>
+                  {
+                      _Client.GetWhoseTurn();
+                  });
+            }
+            UpdateMapAndSetActive();
         }
 
-        private void Init()
+        public void Init()
         {
             _Client.GetWhoseTurn();
-            _MineTurn = _ThisPlayer.Id == _Client.GetTurn();
-            CreateMap(setActive: _MineTurn);
-
-            _Timer = new(DispatcherPriority.Normal);
-            _Timer.Interval = TimeSpan.FromMilliseconds(300);
-            _Timer.Tick += CheckTurn;
-
-            if (!_MineTurn)
+            while (_Client.GetTurn() != _ThisPlayer.Id)
             {
-                _Timer.Start();
+                Thread.Sleep(500);
+                _Client.GetWhoseTurn();
             }
+            UpdateMapAndSetActive();
         }
-
-        private void CheckTurn(object sender, EventArgs e)
-        {
-            _Client.GetWhoseTurn();
-            if (_Client.GetTurn() == _ThisPlayer.Id)
-            {
-                _Timer.Stop();
-            }
-        }
-
-        //public void Init()
-        //{
-        //    _Client.GetWhoseTurn();
-        //    while (_Client.GetTurn() != _ThisPlayer.Id)
-        //    {
-        //        Thread.Sleep(500);
-        //        _Client.GetWhoseTurn();
-        //    }
-        //}
 
         private void LeaderBoard()
         {
@@ -84,7 +68,37 @@ namespace TriviadorClient
             PlayerPoint2.Fill = Brushes.Green;
         }
 
-        private void CreateMap(bool setActive)
+        private void CreateMap()
+        {
+            List<Cell> listCells = _Client.GetMap().Cells;
+            UIElementCollection localButtonMap = CanvasMap.Children;
+            foreach (Cell cell in listCells)
+            {
+                if (cell.OwnerId != null)
+                {
+                    SolidColorBrush brush = cell.OwnerId == 0 ? new SolidColorBrush(Color.FromRgb(255, 0, 0)) : new SolidColorBrush(Color.FromRgb(0, 255, 0));
+                    Button button = (Button)localButtonMap[cell.Id - 1];
+                    button.Background = brush;
+
+                    if (cell.OwnerId == _ThisPlayer.Id)
+                    {
+                        foreach (int i in cell.NearestCells)
+                        {
+                            var nearestCell = listCells.Find(x => x.Id == i);
+                            if (nearestCell.OwnerId != _ThisPlayer.Id)
+                            {
+                                Button nearestButton = (Button)localButtonMap[i - 1];
+                                nearestButton.BorderBrush = button.BorderBrush;
+                                nearestButton.BorderThickness = new Thickness(1, 1, 1, 1);
+                                nearestButton.Click -= NearestButton_Click_StartBattle;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void UpdateMapAndSetActive()
         {
             _Client.GetMapFromServer();
             List<Cell> listCells = _Client.GetMap().Cells;
@@ -105,19 +119,9 @@ namespace TriviadorClient
                             if (nearestCell.OwnerId != _ThisPlayer.Id)
                             {
                                 Button nearestButton = (Button)localButtonMap[i - 1];
-                                nearestButton.BorderBrush = button.BorderBrush;
-                                if (setActive)
-                                {
-                                    nearestButton.BorderBrush = brush;
-                                    nearestButton.BorderThickness = new Thickness(5, 5, 5, 5);
-                                    nearestButton.Click += Button_Click_StartQuestion;
-                                }
-                                else
-                                {
-                                    nearestButton.BorderBrush = button.BorderBrush;
-                                    nearestButton.BorderThickness = new Thickness(1, 1, 1, 1);
-                                    nearestButton.Click -= Button_Click_StartQuestion;
-                                }
+                                nearestButton.BorderBrush = brush;
+                                nearestButton.BorderThickness = new Thickness(5, 5, 5, 5);
+                                nearestButton.Click += NearestButton_Click_StartBattle;
                             }
                         }
                     }
@@ -125,49 +129,22 @@ namespace TriviadorClient
             }
         }
 
-        //private void UpdateMapAndSetActive()
-        //{
-        //    _Client.GetMapFromServer();
-        //    List<Cell> listCells = _Client.GetMap().Cells;
-        //    UIElementCollection localButtonMap = CanvasMap.Children;
-        //    foreach (Cell cell in listCells)
-        //    {
-        //        if (cell.OwnerId != null)
-        //        {
-        //            SolidColorBrush brush = cell.OwnerId == 0 ? new SolidColorBrush(Color.FromRgb(255, 0, 0)) : new SolidColorBrush(Color.FromRgb(0, 255, 0));
-        //            Button button = (Button)localButtonMap[cell.Id - 1];
-        //            button.Background = brush;
-
-        //            if (cell.OwnerId == _ThisPlayer.Id)
-        //            {
-        //                foreach (int i in cell.NearestCells)
-        //                {
-        //                    var nearestCell = listCells.Find(x => x.Id == i);
-        //                    if (nearestCell.OwnerId != _ThisPlayer.Id)
-        //                    {
-        //                        Button nearestButton = (Button)localButtonMap[i - 1];
-        //                        nearestButton.BorderBrush = brush;
-        //                        nearestButton.BorderThickness = new Thickness(5, 5, 5, 5);
-        //                        nearestButton.Click += Button_Click_StartQuestion;
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
-
-        private void VisibleOn(object sender, EventArgs e)
+        private void NearestButton_Click_StartBattle(object sender, RoutedEventArgs e)
         {
-            WindowPlayground.Visibility = Visibility.Visible;
-        }
+            Button button = (Button)sender;
+            int cellId = int.Parse((string)button.Tag);
 
+            Cell cell = _Client.GetMap().Cells.Find(x => x.Id == cellId);
+
+            WindowPlayground.Visibility = Visibility.Hidden;
+            new BattleForCell(cell, _Client).Show();
+            WindowPlayground.Visibility = Visibility.Visible;
+            Init();
+        }
 
         private void Button_Click_StartQuestion(object sender, RoutedEventArgs e)
         {
-            WindowPlayground.Visibility = Visibility.Hidden;
-            var a = new Questions(_Client);
-            a.Closed += new EventHandler(VisibleOn);
-            a.Show();
+            new Questions(_Client).Show();
         }
     }
 }

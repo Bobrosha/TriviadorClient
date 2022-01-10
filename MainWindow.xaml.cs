@@ -17,11 +17,6 @@ namespace TriviadorClient
             InitializeComponent();
         }
 
-        private void Button_Click_HostGame(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Button_Click_AddPlayer(object sender, RoutedEventArgs e)
         {
             string nickName = TextBoxNickName.Text;

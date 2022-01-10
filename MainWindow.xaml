@@ -63,13 +63,13 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid>
+    <Grid Name="GridAuthorization" Visibility="Visible">
         <TextBlock Name="TextBlockAuthorization"
-                   HorizontalAlignment="Center" Height="58" Margin="0,51,0,0" TextWrapping="Wrap" Text="Вход" VerticalAlignment="Top" Width="200"
+                   HorizontalAlignment="Left" Height="58" Margin="125,51,0,0" TextWrapping="Wrap" Text="Авторизация" VerticalAlignment="Top" Width="200"
                    FontFamily="Arial"
                    FontSize="30"
                    FontWeight="Bold"
-                   Foreground="#FF534C4C" TextAlignment="Center"/>
+                   Foreground="#FF534C4C"/>
         <TextBox Name="TextBoxNickName"
                  HorizontalAlignment="Left" Height="38" Margin="43,127,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="354"
                  FontSize="26"
@@ -77,22 +77,11 @@
                  Background="#FFF6F6F6"
                  Foreground="Black"
                  TextAlignment="Center"/>
-        <Button Content="Присоединиться" 
+        <Button Content="Войти" 
                 Click="Button_Click_AddPlayer"
                 HorizontalAlignment="Left" 
                 Height="50" 
                 Margin="143,202,0,0" 
-                VerticalAlignment="Top" 
-                Width="134"
-                Background="#FF64CCF1"
-                Foreground="White"
-                FontFamily="Arial"
-                FontSize="20" Style="{DynamicResource RoundedButtonStyle}"/>
-        <Button Content="Создать" 
-                Click="Button_Click_HostGame"
-                HorizontalAlignment="Left"
-                Height="50" 
-                Margin="143,280,0,0" 
                 VerticalAlignment="Top" 
                 Width="134"
                 Background="#FF64CCF1"
