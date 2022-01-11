@@ -46,6 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="FileQuestions" />
     <Resource Include="mapButton1.png" />
     <Resource Include="mapButton10.png" />
     <Resource Include="mapButton11.png" />

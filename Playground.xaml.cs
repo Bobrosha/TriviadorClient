@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -19,10 +20,10 @@ namespace TriviadorClient
         private readonly Player _ThisPlayer;
 
         private bool _MineTurn;
-        private DispatcherTimer _Timer;
-        private List<Button> _NearestButtons;
+        private HashSet<Button> _NearestButtons;
 
         private double _DisplayTimer;
+        private int _DeadTimer = 15;
 
         public Playground(Client client, Player thisPlayer)
         {
@@ -43,9 +44,9 @@ namespace TriviadorClient
             _MineTurn = _ThisPlayer.Id == _Client.GetTurn();
             CreateMap(setActive: _MineTurn);
 
-            _Timer = new(DispatcherPriority.Normal);
-            _Timer.Interval = TimeSpan.FromMilliseconds(300);
-            _Timer.Tick += CheckTurn;
+            DispatcherTimer timer = new(DispatcherPriority.Normal);
+            timer.Interval = TimeSpan.FromMilliseconds(300);
+            timer.Tick += CheckTurn;
 
             if (!_MineTurn)
             {
@@ -58,20 +59,22 @@ namespace TriviadorClient
                 TextBlockTurnTimes.Foreground = brush;
                 TextBlockTurnTimes.Visibility = Visibility.Visible;
 
-                _Timer.Start();
+                timer.Start();
             }
         }
 
         private void CheckTurn(object sender, EventArgs e)
         {
+            DispatcherTimer timer = sender as DispatcherTimer;
+
             _Client.GetWhoseTurn();
-            _DisplayTimer += _Timer.Interval.TotalMilliseconds;
+            _DisplayTimer += timer.Interval.TotalMilliseconds;
             TextBlockTurnTimes.Text = String.Format(CultureInfo.InvariantCulture, "{0:f1}", _DisplayTimer / 1000);
             if (_ThisPlayer.Id == _Client.GetTurn())
             {
                 TextBlockTurn.Visibility = Visibility.Hidden;
                 TextBlockTurnTimes.Visibility = Visibility.Hidden;
-                _Timer.Stop();
+                timer.Stop();
                 Init();
             }
         }
@@ -95,10 +98,45 @@ namespace TriviadorClient
 
         private void CreateMap(bool setActive)
         {
-            _NearestButtons = new List<Button>();
+            _NearestButtons = new HashSet<Button>();
 
             _Client.GetMapFromServer();
             List<Cell> listCells = _Client.GetMap().Cells;
+
+            if (listCells[_ThisPlayer.Id != 0 ? 2 : 12].OwnerId == _ThisPlayer.Id)
+            {
+                foreach (var el in CanvasMap.Children.OfType<Button>().ToList())
+                {
+                    _NearestButtons.Add(el);
+                }
+
+                TextBlockTurn.Visibility = Visibility.Visible;
+                TextBlockTurnTimes.Visibility = Visibility.Visible;
+                TextBlockTurn.Text = "Вы Победили!";
+
+                DispatcherTimer timer = new(DispatcherPriority.Normal);
+                timer.Interval = TimeSpan.FromSeconds(1);
+                timer.Tick += Timer_Tick_Event;
+                timer.Start();
+            }
+            
+            if (listCells[_ThisPlayer.Id == 0 ? 2 : 12].OwnerId != _ThisPlayer.Id)
+            {
+                foreach (var el in CanvasMap.Children.OfType<Button>().ToList())
+                {
+                    _NearestButtons.Add(el);
+                }
+
+                TextBlockTurn.Visibility = Visibility.Visible;
+                TextBlockTurnTimes.Visibility = Visibility.Visible;
+                TextBlockTurn.Text = "Вы Проиграли!";
+
+                DispatcherTimer timer = new(DispatcherPriority.Normal);
+                timer.Interval = TimeSpan.FromSeconds(1);
+                timer.Tick += Timer_Tick_Event;
+                timer.Start();
+            }
+
             UIElementCollection localButtonMap = CanvasMap.Children;
             foreach (Cell cell in listCells)
             {
@@ -108,7 +146,7 @@ namespace TriviadorClient
                     Button button = (Button)localButtonMap[cell.Id - 1];
                     button.Background = brush;
 
-                    if (cell.OwnerId == _ThisPlayer.Id)
+                    if (cell.OwnerId == _ThisPlayer.Id && setActive)
                     {
                         foreach (int i in cell.NearestCells)
                         {
@@ -116,9 +154,9 @@ namespace TriviadorClient
                             if (nearestCell.OwnerId != _ThisPlayer.Id)
                             {
                                 Button nearestButton = (Button)localButtonMap[i - 1];
-                                _NearestButtons.Add(nearestButton);
-                                if (setActive)
+                                if (!_NearestButtons.Contains(nearestButton))
                                 {
+                                    _NearestButtons.Add(nearestButton);
                                     nearestButton.BorderBrush = brush;
                                     nearestButton.BorderThickness = new Thickness(5, 5, 5, 5);
                                     nearestButton.Click += Button_Click_StartQuestion;
@@ -127,6 +165,23 @@ namespace TriviadorClient
                         }
                     }
                 }
+            }
+        }
+
+        private void Timer_Tick_Event(object sender, EventArgs e)
+        {
+            var enumer = _NearestButtons.GetEnumerator();
+            enumer.MoveNext();
+            var el = enumer.Current;
+            el.Visibility = Visibility.Hidden;
+            _NearestButtons.Remove(el);
+            DispatcherTimer timer = sender as DispatcherTimer;
+            _DeadTimer -= (int)timer.Interval.TotalSeconds;
+            TextBlockTurnTimes.Text = _DeadTimer.ToString();
+            if (_DeadTimer <= 0)
+            {
+                timer.Stop();
+                this.Close();
             }
         }
 
@@ -140,26 +195,28 @@ namespace TriviadorClient
         private void Button_Click_StartQuestion(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
-
-            foreach(Button btn in _NearestButtons)
+            if (WindowPlayground.Visibility != Visibility.Hidden)
             {
-                btn.Click -= Button_Click_StartQuestion;
-                btn.BorderThickness = new Thickness(1, 1, 1, 1);
-                btn.BorderBrush = new SolidColorBrush(Color.FromRgb(112, 112, 112));
+                foreach (Button btn in _NearestButtons)
+                {
+                    btn.Click -= Button_Click_StartQuestion;
+                    btn.BorderThickness = new Thickness(1, 1, 1, 1);
+                    btn.BorderBrush = new SolidColorBrush(Color.FromRgb(112, 112, 112));
+                }
+
+                _NearestButtons.Clear();
+
+                var map = _Client.GetMap();
+
+                int index = int.Parse((string)button.Tag);
+
+                Cell currentCell = map.Cells[index];
+
+                WindowPlayground.Visibility = Visibility.Hidden;
+                var questionWindow = new Questions(_Client, currentCell, _ThisPlayer);
+                questionWindow.Closed += new EventHandler(EndTurn);
+                questionWindow.Show();
             }
-
-            _NearestButtons.Clear();
-
-            var map = _Client.GetMap();
-
-            int index = int.Parse((string)button.Tag);
-
-            Cell currentCell = map.Cells[index];
-
-            WindowPlayground.Visibility = Visibility.Hidden;
-            var questionWindow = new Questions(_Client, currentCell, _ThisPlayer);
-            questionWindow.Closed += new EventHandler(EndTurn);
-            questionWindow.Show();
         }
     }
 }
