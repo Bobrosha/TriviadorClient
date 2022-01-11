@@ -201,12 +201,14 @@ namespace TriviadorClient.Entities
             catch (Exception e)
             {
                 _Logger.LogError("Error while getting question " + e.Message);
+                throw;
             }
         }
 
-        public bool CheckAnswer(string answer)
+        public bool SendAnswer(string answer)
         {
-            var content = new StringContent(answer, Encoding.UTF8, "application/json");
+            var json = JsonConvert.SerializeObject(answer);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
             var result = _Client.PostAsync($"{_Uri}/checkQuestion", content).Result;
             if (!result.IsSuccessStatusCode)
             {

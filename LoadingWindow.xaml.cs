@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Threading;
 using TriviadorClient.Entities;
 
 namespace TriviadorClient
@@ -13,12 +15,24 @@ namespace TriviadorClient
         private readonly Client _Client;
         private readonly Player _ThisPlayer;
 
+        private DispatcherTimer _Timer;
+
         public LoadingWindow(Client client, string nickName)
         {
             _Client = client;
+            _ThisPlayer = _Client.GetMap().Players.Find(player => player.Name.Equals(nickName, StringComparison.Ordinal));
+
             InitializeComponent();
+
+            _Timer = new(DispatcherPriority.Normal);
+            _Timer.Interval = TimeSpan.FromSeconds(1);
+            _Timer.Tick += Tick_Event_UpdateListPlayers;
+            _Timer.Start();
+        }
+
+        private void Tick_Event_UpdateListPlayers(object sender, EventArgs e)
+        {
             ListPlayers();
-            _ThisPlayer = _Client.GetMap().Players.Find(player => player.Name.Equals(nickName));
         }
 
         private void ListPlayers()
@@ -28,12 +42,12 @@ namespace TriviadorClient
             ListBoxPlayers.ItemsSource = from player in listPlayers select player.Name;
         }
 
-        private void Button_Click_StartGame(object sender, RoutedEventArgs e)
+        private void Button_Click_Event_StartGame(object sender, RoutedEventArgs e)
         {
             if (_Client.GetReadyStatus())
             {
-                WindowLoading.Visibility = Visibility.Hidden;
                 new Playground(_Client, _ThisPlayer).Show();
+                _Timer.Stop();
                 WindowLoading.Close();
             }
             else

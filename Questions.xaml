@@ -3,15 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.co m/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TriviadorClient"
         mc:Ignorable="d"
         Title="TRIVIADOR" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" Visibility="Visible">
     <Grid>
-        <TextBlock HorizontalAlignment="Center" Height="257" Margin="0,140,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="1804" FontFamily="Calibri Light" FontSize="60" TextAlignment="Center" Padding="0,80,0,0"/>
-        <Button Content="Button" HorizontalAlignment="Left" Click="Button_Click_EndQuestion" Height="188" Margin="54,433,0,0" VerticalAlignment="Top" Width="794" FontFamily="Bahnschrift SemiBold" FontSize="60" Background="White" BorderThickness="3,3,3,3"/>
-        <Button Content="Button" HorizontalAlignment="Left" Click="Button_Click_EndQuestion" Height="188" Margin="54,702,0,0" VerticalAlignment="Top" Width="794" FontFamily="Bahnschrift SemiBold" FontSize="60" Background="White" BorderThickness="3,3,3,3"/>
-        <Button Content="Button" HorizontalAlignment="Left" Click="Button_Click_EndQuestion" Height="188" Margin="1064,433,0,0" VerticalAlignment="Top" Width="794" FontFamily="Bahnschrift SemiBold" FontSize="60" Background="White" BorderThickness="3,3,3,3"/>
-        <Button Content="Button" HorizontalAlignment="Left" Click="Button_Click_EndQuestion" Height="188" Margin="1064,702,0,0" VerticalAlignment="Top" Width="794" FontFamily="Bahnschrift SemiBold" FontSize="60" Background="White" BorderThickness="3,3,3,3"/>
+        <TextBlock Name="TextBlockQuestion" HorizontalAlignment="Center" Height="280" Margin="0,140,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="1804" FontFamily="Calibri Light" FontSize="60" TextAlignment="Center" Padding="0,80,0,0"/>
+        <Canvas x:Name="CanvasWithButtonsAnswers">
+            <Button Name="ButtonAnswer1" Tag="0" Content="Button" HorizontalAlignment="Left" Click="Button_Click_Event_EndQuestion" Height="188" Margin="54,506,0,0" VerticalAlignment="Top" Width="794" FontFamily="Bahnschrift SemiBold" FontSize="60" Background="White" BorderThickness="3,3,3,3"/>
+            <Button Name="ButtonAnswer2" Tag="1" Content="Button" HorizontalAlignment="Left" Click="Button_Click_Event_EndQuestion" Height="188" Margin="54,796,0,0" VerticalAlignment="Top" Width="794" FontFamily="Bahnschrift SemiBold" FontSize="60" Background="White" BorderThickness="3,3,3,3"/>
+            <Button Name="ButtonAnswer3" Tag="2" Content="Button" HorizontalAlignment="Left" Click="Button_Click_Event_EndQuestion" Height="188" Margin="1064,506,0,0" VerticalAlignment="Top" Width="794" FontFamily="Bahnschrift SemiBold" FontSize="60" Background="White" BorderThickness="3,3,3,3"/>
+            <Button Name="ButtonAnswer4" Tag="3" Content="Button" HorizontalAlignment="Left" Click="Button_Click_Event_EndQuestion" Height="188" Margin="1064,796,0,0" VerticalAlignment="Top" Width="794" FontFamily="Bahnschrift SemiBold" FontSize="60" Background="White" BorderThickness="3,3,3,3"/>
+        </Canvas>
         <TextBlock Name="TextBlockTimer" HorizontalAlignment="Center" Height="66" Text="60" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" FontFamily="Calibri Light" TextAlignment="Center" Padding="0,10,0,0" Margin="0,35,0,0" Foreground="Red" FontSize="36"/>
     </Grid>
 </Window>

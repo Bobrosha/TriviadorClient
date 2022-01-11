@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -19,15 +20,16 @@ namespace TriviadorClient
 
         private bool _MineTurn;
         private DispatcherTimer _Timer;
+        private List<Button> _NearestButtons;
 
-        private double timer;
+        private double _DisplayTimer;
 
         public Playground(Client client, Player thisPlayer)
         {
             _ThisPlayer = thisPlayer;
             _Client = client;
 
-            //_ThisPlayer.Id = 1;
+            //_ThisPlayer.Id = 0;
 
             InitializeComponent();
             LeaderBoard();
@@ -36,6 +38,7 @@ namespace TriviadorClient
 
         private void Init()
         {
+            LeaderBoard();
             _Client.GetWhoseTurn();
             _MineTurn = _ThisPlayer.Id == _Client.GetTurn();
             CreateMap(setActive: _MineTurn);
@@ -46,7 +49,7 @@ namespace TriviadorClient
 
             if (!_MineTurn)
             {
-                timer = 0;
+                _DisplayTimer = 0;
 
                 SolidColorBrush brush = _ThisPlayer.Id != 0 ? new SolidColorBrush(Color.FromRgb(255, 0, 0)) : new SolidColorBrush(Color.FromRgb(0, 255, 0));
                 TextBlockTurn.Foreground = brush;
@@ -62,8 +65,8 @@ namespace TriviadorClient
         private void CheckTurn(object sender, EventArgs e)
         {
             _Client.GetWhoseTurn();
-            timer += _Timer.Interval.TotalMilliseconds;
-            TextBlockTurnTimes.Text = String.Format("{0:f1}", timer / 1000);
+            _DisplayTimer += _Timer.Interval.TotalMilliseconds;
+            TextBlockTurnTimes.Text = String.Format(CultureInfo.InvariantCulture, "{0:f1}", _DisplayTimer / 1000);
             if (_ThisPlayer.Id == _Client.GetTurn())
             {
                 TextBlockTurn.Visibility = Visibility.Hidden;
@@ -92,6 +95,8 @@ namespace TriviadorClient
 
         private void CreateMap(bool setActive)
         {
+            _NearestButtons = new List<Button>();
+
             _Client.GetMapFromServer();
             List<Cell> listCells = _Client.GetMap().Cells;
             UIElementCollection localButtonMap = CanvasMap.Children;
@@ -111,18 +116,12 @@ namespace TriviadorClient
                             if (nearestCell.OwnerId != _ThisPlayer.Id)
                             {
                                 Button nearestButton = (Button)localButtonMap[i - 1];
-                                nearestButton.BorderBrush = button.BorderBrush;
+                                _NearestButtons.Add(nearestButton);
                                 if (setActive)
                                 {
                                     nearestButton.BorderBrush = brush;
                                     nearestButton.BorderThickness = new Thickness(5, 5, 5, 5);
                                     nearestButton.Click += Button_Click_StartQuestion;
-                                }
-                                else
-                                {
-                                    nearestButton.BorderBrush = button.BorderBrush;
-                                    nearestButton.BorderThickness = new Thickness(1, 1, 1, 1);
-                                    nearestButton.Click -= Button_Click_StartQuestion;
                                 }
                             }
                         }
@@ -140,8 +139,25 @@ namespace TriviadorClient
 
         private void Button_Click_StartQuestion(object sender, RoutedEventArgs e)
         {
+            Button button = (Button)sender;
+
+            foreach(Button btn in _NearestButtons)
+            {
+                btn.Click -= Button_Click_StartQuestion;
+                btn.BorderThickness = new Thickness(1, 1, 1, 1);
+                btn.BorderBrush = new SolidColorBrush(Color.FromRgb(112, 112, 112));
+            }
+
+            _NearestButtons.Clear();
+
+            var map = _Client.GetMap();
+
+            int index = int.Parse((string)button.Tag);
+
+            Cell currentCell = map.Cells[index];
+
             WindowPlayground.Visibility = Visibility.Hidden;
-            var questionWindow = new Questions(_Client);
+            var questionWindow = new Questions(_Client, currentCell, _ThisPlayer);
             questionWindow.Closed += new EventHandler(EndTurn);
             questionWindow.Show();
         }
