@@ -30,8 +30,6 @@ namespace TriviadorClient
             _ThisPlayer = thisPlayer;
             _Client = client;
 
-            //_ThisPlayer.Id = 0;
-
             InitializeComponent();
             LeaderBoard();
             Init();
@@ -181,7 +179,7 @@ namespace TriviadorClient
             if (_DeadTimer <= 0)
             {
                 timer.Stop();
-                this.Close();
+                Close();
             }
         }
 

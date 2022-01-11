@@ -96,6 +96,8 @@ namespace TriviadorClient.Entities
             }
         }
 
+        public void ShutdownServer() => _Client.GetAsync($"{_Uri}/Shutdown");
+
         public void NextTurn()
         {
             try

@@ -57,20 +57,7 @@ namespace TriviadorClient.Entities
 
         public static bool CheckQuestion(string answer)
         {
-            //if (_CurrentQuestion == null)
-            //{
-            //    GetQuestion();
-            //}
-
-            bool flag = _CurrentQuestion.ListAnswers[0].Equals(answer);
-            //_TurnQuestion++;
-            //if (_TurnQuestion >= 2) // более количества пользователей
-            //{
-            //_TurnQuestion = 0;
-            //_CurrentQuestion = null;
-            //}
-            
-            return flag;
+            return _CurrentQuestion.ListAnswers[0].Equals(answer);
         }
 
         private static void GetRandomQuestion()
@@ -111,7 +98,6 @@ namespace TriviadorClient.Entities
             player.ColorName = Enum.GetValues(typeof(KnownColor)).GetValue(id).ToString();
             player.Score = 1000;
             _Map.Players.Add(player);
-            //_Turn = id;
         }
 
         public static List<Player> GetPlayersList()
@@ -133,22 +119,6 @@ namespace TriviadorClient.Entities
         {
             if (GetReadyStatus())
             {
-                //LinkedList<int> linkedListNames = new(from player in _Map.Players
-                //                                    select player.Id);
-
-                //var name = linkedListNames.First;
-                //while (name != null)
-                //{
-                //    if (name.Value == _Turn)
-                //    {
-                //        _Turn = (name.Next ?? linkedListNames.First).Value;
-                //        break;
-                //    }
-                //    else
-                //    {
-                //        name = name.Next;
-                //    }
-                //}
                 _Turn = _Turn == 0 ? 1 : 0;
                 _CurrentQuestion = null;
                 return _Turn;
@@ -157,14 +127,6 @@ namespace TriviadorClient.Entities
             {
                 return null;
             }
-        }
-
-        // Deprecated
-        public static void SetMap(TriviadorMap map)
-        {
-            _Map = map;
-            if (GetReadyStatus())
-                _Turn = _Map.Players.First().Id;
         }
     }
 }

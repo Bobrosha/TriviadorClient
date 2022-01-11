@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
+using System.Windows;
 using TriviadorClient.Entities;
 using static TriviadorClient.Entities.TriviadorMap;
 
@@ -66,21 +67,6 @@ namespace TriviadorClient.Controllers
             {
                 _logger.LogWarning("Exception while CheckQuestion: " + e.Message);
                 return false;
-            }
-        }
-
-        [HttpPost("setMap")]
-        public StatusCodeResult Post([FromBody] TriviadorMap map)
-        {
-            try
-            {
-                GameSession.SetMap(map);
-                return new OkResult();
-            }
-            catch (System.Exception e)
-            {
-                _logger.LogWarning("Exception while setting map: " + e.Message);
-                return new BadRequestResult();
             }
         }
 

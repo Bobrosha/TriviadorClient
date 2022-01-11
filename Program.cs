@@ -11,11 +11,7 @@ namespace TriviadorClient
         public static void Start()
         {
             CreateServer().Start();
-            //        WebHost.CreateDefaultBuilder().UseKestrel(x =>
-            //        {
-            //            x.ListenAnyIP(8080);
-            //        }).UseStartup<Startup>()
-            //.Build();
+
             CreateHostBuilder(null).Build().Run();
         }
 

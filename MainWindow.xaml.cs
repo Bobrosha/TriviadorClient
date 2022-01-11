@@ -117,7 +117,6 @@ namespace TriviadorClient
             WindowAuthorization.Visibility = Visibility.Hidden;
             new LoadingWindow(_Client, nickName).Show();
             WindowAuthorization.Close();
-
         }
     }
 }
